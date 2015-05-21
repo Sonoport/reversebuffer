@@ -1,0 +1,39 @@
+{
+  "name": "reverseplayer",
+  "version": "1.0.0",
+  "description": "Reverse playback",
+  "main": "lib",
+  "scripts": {
+    "test": "gulp test"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "keywords": [
+    "webaudio",
+    "reverse",
+    "playback",
+    "mp3"
+  ],
+  "author": "Yap Hong Kheng",
+  "license": "MIT",
+  "devDependencies": {
+    "browserify": "^10.2.0",
+    "globby": "^2.0.0",
+    "gulp": "^3.8.11",
+    "gulp-jshint": "^1.10.0",
+    "gulp-load-plugins": "^0.10.0",
+    "gulp-util": "^3.0.4",
+    "gulp-webserver": "^0.9.1",
+    "jshint-stylish": "^1.0.2",
+    "tape": "^4.0.0",
+    "through2": "^0.6.5",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.2.1"
+  },
+  "dependencies": {
+    "webaudioloader": "^1.0.3"
+  }
+}
