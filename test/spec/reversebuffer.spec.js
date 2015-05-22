@@ -8,13 +8,16 @@ var audioContext = new AudioContext();
 
 // testing suites
 test('ReverseBuffer Constructor', function(t){
-	t.plan(1);
+	t.plan(2);
 
 	var rb= null;
-
+	var rb2 = null;
 	t.doesNotThrow(function(){
 		rb = new ReverseBuffer();
 	}, {}, "Initializes without error");
+
+	rb2 = new ReverseBuffer();
+	t.equal(window.ReverseBuffer, rb2);
 
 });
 

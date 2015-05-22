@@ -100,4 +100,4 @@ gulp.task('watch', function(){
 	gulp.watch(paths.testspecs, ['browserify:test']);
 });
 
-gulp.task('default', ['jshint', 'browserify', 'watch', 'server']);
+gulp.task('default', ['jshint', 'browserify:test', 'watch', 'server']);

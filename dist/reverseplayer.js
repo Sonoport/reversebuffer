@@ -13,8 +13,7 @@ function ReverseBuffer(options){
 
 	window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
-	this.playPosition = 0;
-	this.playStartTime = 0;
+	window.ReverseBuffer = this;
 
 	options = options || {};
 	for (var opt in options){

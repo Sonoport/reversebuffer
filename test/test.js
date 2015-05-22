@@ -9,13 +9,16 @@ var audioContext = new AudioContext();
 
 // testing suites
 test('ReverseBuffer Constructor', function(t){
-	t.plan(1);
+	t.plan(2);
 
 	var rb= null;
-
+	var rb2 = null;
 	t.doesNotThrow(function(){
 		rb = new ReverseBuffer();
 	}, {}, "Initializes without error");
+
+	rb2 = new ReverseBuffer();
+	t.equal(window.ReverseBuffer, rb2);
 
 });
 
@@ -68,8 +71,7 @@ function ReverseBuffer(options){
 
 	window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
-	this.playPosition = 0;
-	this.playStartTime = 0;
+	window.ReverseBuffer = this;
 
 	options = options || {};
 	for (var opt in options){
@@ -2379,7 +2381,7 @@ process.nextTick = function (fun) {
         }
     }
     queue.push(new Item(fun, args));
-    if (!draining) {
+    if (queue.length === 1 && !draining) {
         setTimeout(drainQueue, 0);
     }
 };
