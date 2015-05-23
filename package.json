@@ -1,7 +1,7 @@
 {
-  "name": "reverseplayer",
-  "version": "1.0.0",
-  "description": "Give a reverse Audio Buffer from a forward playing buffer",
+  "name": "reversebuffer",
+  "version": "1.0.1",
+  "description": "Give a reversed Audio Buffer from a forward playing buffer",
   "main": "lib/reversebuffer.js",
   "scripts": {
     "test": "gulp"
