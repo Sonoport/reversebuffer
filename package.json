@@ -33,9 +33,7 @@
     "tape": "^4.0.0",
     "through2": "^0.6.5",
     "vinyl-buffer": "^1.0.0",
-    "vinyl-source-stream": "^1.1.0"
-  },
-  "dependencies": {
+    "vinyl-source-stream": "^1.1.0",
     "webaudioloader": "^1.0.3"
   }
 }

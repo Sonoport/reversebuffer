@@ -63,11 +63,15 @@ var reverseBuffer = new ReverseBuffer({
 
 ## Install
 
-1. Using browserify
+1. npm
+	
+	``` npm install --save-dev reversebuffer```
+
+2. Using browserify
 	
 	```var ReverseBuffer = require("reversebuffer");```
 
-2. Standalone (global object)
+3. Standalone (global object, AMD) [builds are here](https://github.com/Sonoport/reversebuffer/tree/master/dist)
 
 ## API
 
