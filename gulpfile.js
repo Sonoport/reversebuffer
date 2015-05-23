@@ -16,6 +16,17 @@ var paths = {
 	dist: './dist'
 };
 
+var pkg = require('./package.json');
+var today = new Date().toString();
+
+var banner = ['/**',
+	' * <%= pkg.name %> - <%= pkg.description %>',
+	' * @version v<%= pkg.version %>',
+	' * @license <%= pkg.license %>',
+	' * '+'"'+today+'"',
+	' */',
+	].join('\n');
+
 gulp.task('server', function(){
 	return gulp.src([paths.dist, paths.test])
 		.pipe($.webserver({
@@ -91,9 +102,16 @@ function bundle() {
 		b.bundle().pipe(bundledStream);
 	});
 
-
 	return bundledStream;	
 }
+
+gulp.task('releasejs', function(){
+	return gulp.src([paths.dist+'/reverseplayer.js'])
+		.pipe($.uglify())
+		.pipe($.rename({extname: '.min.js'}))
+		.pipe($.header(banner, {pkg : pkg}))
+		.pipe(gulp.dest(paths.dist));
+});
 
 gulp.task('watch', function(){
 	gulp.watch(paths.jssrc, ['browserify']);
