@@ -1,27 +1,12 @@
 "use strict";
 
 var test = require('tape');
-var ReverseBuffer = require('../../lib/reversebuffer.js');
+var reverseBuffer = require('../../lib/reversebuffer.js');
 var WebAudioLoader = require('webaudioloader');
 
 var audioContext = new AudioContext();
 
-// testing suites
-test('ReverseBuffer Constructor', function(t){
-	t.plan(2);
-
-	var rb= null;
-	var rb2 = null;
-	t.doesNotThrow(function(){
-		rb = new ReverseBuffer();
-	}, {}, "Initializes without error");
-
-	rb2 = new ReverseBuffer();
-	t.equal(window.ReverseBuffer, rb2);
-
-});
-
-test('ReverseBuffer Constructor Arguments', function(t){
+test('reverseBuffer Function', function(t){
 
 	var buffer1 = null;
 	// Load an dummy audiofile
@@ -40,17 +25,17 @@ test('ReverseBuffer Constructor Arguments', function(t){
 				buffer1 = buffer;
 			}
 		}
-	});	
+	});
 
 	t.plan(1);
 
 	var rb = null;
 
 	t.doesNotThrow(function(){
-		rb = new ReverseBuffer({
+		rb = reverseBuffer({
 			buffer: buffer1,
 			context: audioContext
 		});
-	}, {}, "Initializes without error");
+	}, {}, "Reverses without error");
 
 });
