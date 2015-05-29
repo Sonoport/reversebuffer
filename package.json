@@ -1,6 +1,6 @@
 {
   "name": "reversebuffer",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "Give a reversed Audio Buffer from a forward playing buffer",
   "main": "lib/reversebuffer.js",
   "scripts": {
@@ -14,7 +14,9 @@
     "webaudio",
     "reverse",
     "playback",
-    "mp3"
+    "mp3",
+    "audio",
+    "audiobuffer"
   ],
   "author": "Yap Hong Kheng",
   "license": "MIT",
