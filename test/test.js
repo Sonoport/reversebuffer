@@ -2,27 +2,12 @@
 "use strict";
 
 var test = require('tape');
-var ReverseBuffer = require('../../lib/reversebuffer.js');
+var reverseBuffer = require('../../lib/reversebuffer.js');
 var WebAudioLoader = require('webaudioloader');
 
 var audioContext = new AudioContext();
 
-// testing suites
-test('ReverseBuffer Constructor', function(t){
-	t.plan(2);
-
-	var rb= null;
-	var rb2 = null;
-	t.doesNotThrow(function(){
-		rb = new ReverseBuffer();
-	}, {}, "Initializes without error");
-
-	rb2 = new ReverseBuffer();
-	t.equal(window.ReverseBuffer, rb2);
-
-});
-
-test('ReverseBuffer Constructor Arguments', function(t){
+test('reverseBuffer Function', function(t){
 
 	var buffer1 = null;
 	// Load an dummy audiofile
@@ -41,18 +26,18 @@ test('ReverseBuffer Constructor Arguments', function(t){
 				buffer1 = buffer;
 			}
 		}
-	});	
+	});
 
 	t.plan(1);
 
 	var rb = null;
 
 	t.doesNotThrow(function(){
-		rb = new ReverseBuffer({
+		rb = reverseBuffer({
 			buffer: buffer1,
 			context: audioContext
 		});
-	}, {}, "Initializes without error");
+	}, {}, "Reverses without error");
 
 });
 
@@ -60,48 +45,45 @@ test('ReverseBuffer Constructor Arguments', function(t){
 "use strict";
 
 /*
-	constructor
-	var revBuffer = new ReverseBuffer({buffer: audioBuffer, context: AudioContext});
+	var revBuffer = ReverseBuffer({buffer: audioBuffer, context: AudioContext});
+	var revBuffer = ReverseBuffer(audioBuffer);
 */
 function ReverseBuffer(options){
 
-	if(!(this instanceof ReverseBuffer)){
-		throw new TypeError("ReverseBuffer constructor cannot be called as a function.");
-	}
-
 	window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
-	window.ReverseBuffer = this;
+	var buffer;
+	var context;
+	var reverseBuffer;
 
-	options = options || {};
-	for (var opt in options){
-		if (this.hasOwnProperty(opt) && options[opt] !== undefined){
-			this[opt] = options[opt];
-		}
-	}
-	this.context = options.context || window.AudioContext;
-	this._buffer = options.buffer;
-	this.reverseBuffer = null;
 	var _chIndex = 0;
 	var _sIndex = 0;
 
-	if (this._buffer) {
-	   this.reverseBuffer = this.context.createBuffer(this._buffer.numberOfChannels, this._buffer.length, this._buffer.sampleRate);
+	if (options instanceof AudioBuffer){
+		buffer = options;
+		context = new window.AudioContext();
+	}else{
+		context = options.context || new window.AudioContext();
+		buffer = options.buffer;
+	}
 
-	   for (_chIndex = 0; _chIndex < this._buffer.numberOfChannels; _chIndex++){
-	      var dest = this.reverseBuffer.getChannelData(_chIndex);
-	      var src = this._buffer.getChannelData(_chIndex);
-	      for (_sIndex = 0; _sIndex < this._buffer.length; _sIndex++){
-	         dest[_sIndex] = src[this._buffer.length-_sIndex];
+	if (buffer) {
+	   reverseBuffer = context.createBuffer(buffer.numberOfChannels, buffer.length, buffer.sampleRate);
+
+	   for (_chIndex = 0; _chIndex < buffer.numberOfChannels; _chIndex++){
+	      var dest = reverseBuffer.getChannelData(_chIndex);
+	      var src = buffer.getChannelData(_chIndex);
+	      for (_sIndex = 0; _sIndex < buffer.length; _sIndex++){
+	         dest[_sIndex] = src[buffer.length-_sIndex];
 	      }
 	   }
 	}
 
-   return this.reverseBuffer;
-
+  return reverseBuffer;
 }
 
 module.exports = ReverseBuffer;
+
 },{}],3:[function(require,module,exports){
 
 },{}],4:[function(require,module,exports){
