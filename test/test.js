@@ -45,10 +45,10 @@ test('reverseBuffer Function', function(t){
 "use strict";
 
 /*
-	var revBuffer = ReverseBuffer({buffer: audioBuffer, context: AudioContext});
-	var revBuffer = ReverseBuffer(audioBuffer);
+	var revBuffer = reversebuffer({buffer: audioBuffer, context: AudioContext});
+	var revBuffer = reversebuffer(audioBuffer);
 */
-function ReverseBuffer(options){
+function reversebuffer(options){
 
 	window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
@@ -82,7 +82,7 @@ function ReverseBuffer(options){
   return reverseBuffer;
 }
 
-module.exports = ReverseBuffer;
+module.exports = reversebuffer;
 
 },{}],3:[function(require,module,exports){
 

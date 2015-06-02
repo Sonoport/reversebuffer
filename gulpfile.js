@@ -47,7 +47,7 @@ gulp.task('browserify', ['jshint'], function(){
 	var bundledStream = $.through2();
 
 	bundledStream
-		.pipe($.source('reverseplayer.js'))
+		.pipe($.source('reversebuffer.js'))
 		.pipe($.buffer())
 		.on('error', $.util.log)
 		.pipe(gulp.dest(paths.dist));
@@ -105,8 +105,12 @@ function bundle() {
 	return bundledStream;	
 }
 
-gulp.task('releasejs', function(){
-	return gulp.src([paths.dist+'/reverseplayer.js'])
+gulp.task('clean', function(){
+	$.del([paths.dist+'/*.min.js']);
+});
+
+gulp.task('releasejs', ['clean'], function(){
+	return gulp.src([paths.dist+'/reversebuffer.js'])
 		.pipe($.uglify())
 		.pipe($.rename({extname: '.min.js'}))
 		.pipe($.header(banner, {pkg : pkg}))
@@ -119,3 +123,4 @@ gulp.task('watch', function(){
 });
 
 gulp.task('default', ['jshint', 'browserify:test', 'watch', 'server']);
+gulp.task('makerelease', ['releasejs']);
